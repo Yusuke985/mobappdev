@@ -26,7 +26,6 @@ android {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-
     }
     viewBinding{
         enabled = true
@@ -34,7 +33,9 @@ android {
 }
 
 dependencies {
+
     implementation libs.datastore.rxjava3
+
     coreLibraryDesugaring libs.desuger.jdk.libs
     implementation libs.appcompat
     implementation libs.material
