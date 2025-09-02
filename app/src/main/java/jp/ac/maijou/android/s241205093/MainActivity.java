@@ -40,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
         var text = binding.editTextText.getText().toString();
         binding.text.setText(text);
     });
-   binding.editTextText.addTextChangedListener(new TextWatcher() {
+    prefDataStore.getString("name")
+            .ifPresent(name -> binding.text.setText(name));
+
+   /*binding.editTextText.addTextChangedListener(new TextWatcher() {
        @Override
        public void afterTextChanged(Editable s) {
             binding.text.setText(s.toString());
@@ -55,8 +58,13 @@ public class MainActivity extends AppCompatActivity {
        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
        }
-   });
-
+   });*/
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        prefDataStore.getString("name")
+                .ifPresent(name -> binding.text.setText(name));
     }
 }
 

@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.PreferencesKeys;
 import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava3.RxDataStore;
 
+import java.util.Optional;
+
 import io.reactivex.rxjava3.core.Single;
 
 //import java.util.prefs.Preferences;
@@ -30,6 +32,15 @@ public class PrefDataStore {
         }
         return instance;
     }
+    public Optional<String> getString(String key) {
+        return dataStore.data()
+                .map(prefs -> {
+                    var prefKey = PreferencesKeys.stringKey(key);
+                    return Optional.ofNullable(prefs.get(prefKey));
+                })
+                .blockingFirst();
+    }
+
     public void setString(String key, String value) {
         dataStore.updateDataAsync(prefsIn -> {
                     var mutablePreferences = prefsIn.toMutablePreferences();
